@@ -1,0 +1,7 @@
+base   sifas
+author Suyooo
+email  me@suyo.be
+date   2021-11-14
+name   sifas plugin
+desc   simple ways to add card images, song images and so on
+url    https://suyo.be/sifas/wiki/start
