@@ -98,7 +98,7 @@ class action_plugin_sifas_toolbar extends \dokuwiki\Extension\ActionPlugin
         
         $skills = [];
         foreach (syntax_plugin_sifas_skill::$SKILL_NAMES as $skill => $name) {
-            $skills['{{skill:'.$skill.'}}'] = $skill . ".png";
+            $skills['{{skill:'.$skill.'}}'] = str_replace(":", "_", $skill) . ".png";
         }
         $event->data[] = array (
             'type' => 'picker',

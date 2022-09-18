@@ -13,10 +13,10 @@ class syntax_plugin_sifas_skill extends \dokuwiki\Extension\SyntaxPlugin
                             "critpower" => "Crit Power Up",
                             "dr" => "Damage Reduction",
                             "heal" => "Heal",
-                            "p_appeal" => "Appeal+ (Passive)",
-                            "p_stamina" => "Stamina+ (Passive)",
-                            "p_technique" => "Technique+ (Passive)",
-                            "p_typebonus" => "Type Bonus+ (Passive)",
+                            "p:appeal" => "Appeal+ (Passive)",
+                            "p:stamina" => "Stamina+ (Passive)",
+                            "p:technique" => "Technique+ (Passive)",
+                            "p:typebonus" => "Type Bonus+ (Passive)",
                             "shield" => "Shield",
                             "skillchance" => "Skill Chance Up",
                             "spfill" => "SP Gauge Fill",
@@ -41,13 +41,14 @@ class syntax_plugin_sifas_skill extends \dokuwiki\Extension\SyntaxPlugin
     /** @inheritDoc */
     public function connectTo($mode)
     {
-        $this->Lexer->addSpecialPattern('\{\{skill:(?:appeal|critchance|critpower|dr|heal|shield|skillchance|spfill|spgain|spocpower|sppower|uncapcrit|vogain|voplus|p:appeal|p:stamina|p:technique|p:typebonus)\}\}', $mode, 'plugin_sifas_skill');
+        $this->Lexer->addSpecialPattern('\{\{skill:(?:'.implode("|",array_keys(syntax_plugin_sifas_skill::$SKILL_NAMES)).')\}\}', $mode, 'plugin_sifas_skill');
     }
     
     public function handle($match, $state, $pos, Doku_Handler $handler)
     {
-        $skill = str_replace(":", "_", substr($match, 8, -2));
-        return array($skill, "Skill: " . syntax_plugin_sifas_skill::$SKILL_NAMES[$skill]);
+        $skill = substr($match, 8, -2);
+        $img = str_replace(":", "_", $skill);
+        return array($img, "Skill: " . syntax_plugin_sifas_skill::$SKILL_NAMES[$skill]);
     }
 
     public function render($mode, Doku_Renderer $renderer, $data)
