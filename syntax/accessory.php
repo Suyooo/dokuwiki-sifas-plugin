@@ -7,6 +7,21 @@
  */
 class syntax_plugin_sifas_accessory extends \dokuwiki\Extension\SyntaxPlugin
 {
+    public static $ACC_ATTRS = array(
+                            "bangle" => array("p","a"),
+                            "belt" => array("p","c","n"),
+                            "bracelet" => array("s","a","e"),
+                            "brooch" => array("s","c","n"),
+                            "choker" => array("s","a","e"),
+                            "earring" => array("s","p","c"),
+                            "hairpin" => array("p","c","n"),
+                            "keychain" => array("p","a","e"),
+                            "necklace" => array("a","n","e"),
+                            "pouch" => array("c","a","e"),
+                            "ribbon" => array("s","p","n"),
+                            "towel" => array("p","a","n"),
+                            "wristband" => array("s","c","e")
+                        );
     public static $ACC_LINKS = array(
                             "bangle" => "gameplay/accessories#dlp_accessories",
                             "belt" => "gameplay/accessories#dlp_accessories",
@@ -36,7 +51,11 @@ class syntax_plugin_sifas_accessory extends \dokuwiki\Extension\SyntaxPlugin
     /** @inheritDoc */
     public function connectTo($mode)
     {
-        $this->Lexer->addSpecialPattern('\{\{acc:(?:bangle:(?:a|p)|belt:(?:c|n|p)|bracelet:(?:a|e|s)|brooch:(?:c|n|s)|choker:(?:a|e|s)|earring:(?:c|p|s)|hairpin:(?:c|n|p)|keychain:(?:a|e|p)|necklace:(?:a|e|n)|pouch:(?:a|c|e)|ribbon:(?:n|p|s)|towel:(?:a|n|p)|wristband:(?:c|e|s))\}\}', $mode, 'plugin_sifas_accessory');
+        $pat = array();
+        foreach (syntax_plugin_sifas_accessory::$ACC_ATTRS as $type => $attrs) {
+            $pat[] = $type . ":(?:" . implode("|", $attrs) . ")";
+        }
+        $this->Lexer->addSpecialPattern('\{\{acc:(?:'.implode("|",$pat).')\}\}', $mode, 'plugin_sifas_accessory');
     }
     
     public function handle($match, $state, $pos, Doku_Handler $handler)
