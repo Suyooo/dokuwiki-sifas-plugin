@@ -52,9 +52,9 @@ class syntax_plugin_sifas_cardlink extends \dokuwiki\Extension\SyntaxPlugin
     {
         if ($mode == 'xhtml') {
             if ($data['card_id']) {
-                $renderer->doc .= "<a class='cardlink wikilink" . (page_exists("cards:" . $data['page_name']) ? 1 : "2' rel='nofollow") . "' href='" . DOKU_BASE . "cards/" . $data['page_name'] . "' data-wiki-id='cards:" . $data['page_name'] . "'><img src='/sifas/wiki/images/card_thumb_idlz/" . $data['card_id'] . ".png'> " . $data['canonical_name'] . "</a>";
+                $renderer->doc .= "<a class='cardlink wikilink" . (page_exists("cards:" . $data['page_name']) ? 1 : "2' rel='nofollow") . "' href='" . hsc(DOKU_BASE . "cards/" . $data['page_name']) . "' data-wiki-id='cards:" . hsc($data['page_name']) . "'><img src='/sifas/wiki/images/card_thumb_idlz/" . hsc($data['card_id']) . ".png'> " . hsc($data['canonical_name']) . "</a>";
             } else {
-                $renderer->doc .= $data['failed_match'];
+                $renderer->doc .= hsc($data['failed_match']);
             }
             return true;
         }

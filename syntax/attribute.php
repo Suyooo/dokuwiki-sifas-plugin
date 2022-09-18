@@ -44,7 +44,7 @@ class syntax_plugin_sifas_attribute extends \dokuwiki\Extension\SyntaxPlugin
         if ($mode !== 'xhtml') {
             return false;
         }
-        $renderer->doc .= "<img class='inline_icon' title='" . $data[1] . "' alt='" . $data[1] . "' src='/sifas/wiki/images/attribute/" . $data[0] . ".png'>";
+        $renderer->doc .= "<img class='inline_icon' title='" . hsc($data[1]) . "' alt='" . hsc($data[1]) . "' src='/sifas/wiki/images/attribute/" . hsc($data[0]) . ".png'>";
         return true;
     }
 }

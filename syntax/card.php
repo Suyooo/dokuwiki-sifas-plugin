@@ -34,7 +34,7 @@ class syntax_plugin_sifas_card extends \dokuwiki\Extension\SyntaxPlugin
     public function render($mode, Doku_Renderer $renderer, $data)
     {
         if ($mode == 'xhtml') {
-            $renderer->doc .= "<a href='" . DOKU_BASE . "cards/" . $data[3] . "'" . (page_exists("cards:" . $data[3]) ? "" : " rel='nofollow'") . " data-wiki-id='cards:" . $data[3] . "'><img class='card_" . ($data[0] ? "full" : "thumb") . "' src='/sifas/wiki/images/card_" . ($data[0] ? "full" : "thumb") . ($data[1] ? "" : "_idlz") . "/" . $data[2] . ".png'></a>";
+            $renderer->doc .= "<a href='" . hsc(DOKU_BASE . "cards/" . $data[3]) . "'" . (page_exists("cards:" . $data[3]) ? "" : " rel='nofollow'") . " data-wiki-id='cards:" . hsc($data[3]) . "'><img class='card_" . ($data[0] ? "full" : "thumb") . "' src='/sifas/wiki/images/card_" . ($data[0] ? "full" : "thumb") . ($data[1] ? "" : "_idlz") . "/" . hsc($data[2]) . ".png'></a>";
             return true;
         }
         if($mode == 'metadata') {

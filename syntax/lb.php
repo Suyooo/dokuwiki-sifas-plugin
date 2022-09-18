@@ -36,7 +36,7 @@ class syntax_plugin_sifas_lb extends \dokuwiki\Extension\SyntaxPlugin
         if ($mode !== 'xhtml') {
             return false;
         }
-        $renderer->doc .= "<div title='" . $data[1] . "' class='limitbreak'>";
+        $renderer->doc .= "<div title='" . hsc($data[1]) . "' class='limitbreak'>";
         $renderer->doc .= "<img src='/sifas/wiki/images/limit_break/" . ($data[0] >= 1 ? 1 : 0) . ".png'>";
         $renderer->doc .= "<img src='/sifas/wiki/images/limit_break/" . ($data[0] >= 2 ? 1 : 0) . ".png'>";
         $renderer->doc .= "<img src='/sifas/wiki/images/limit_break/" . ($data[0] >= 3 ? 1 : 0) . ".png'>";

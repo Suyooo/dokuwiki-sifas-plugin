@@ -33,7 +33,7 @@ class syntax_plugin_sifas_song extends \dokuwiki\Extension\SyntaxPlugin
         if ($mode !== 'xhtml') {
             return false;
         }
-        $renderer->doc .= "<img class='song_jacket' src='/sifas/wiki/images/song_jacket/" . $data . ".png'>";
+        $renderer->doc .= "<img class='song_jacket' src='/sifas/wiki/images/song_jacket/" . hsc($data) . ".png'>";
         return true;
     }
 }

@@ -51,7 +51,7 @@ class syntax_plugin_sifas_accessory extends \dokuwiki\Extension\SyntaxPlugin
         if ($mode !== 'xhtml') {
             return false;
         }
-        $renderer->doc .= "<a href='" . DOKU_BASE . $data[2] . "' data-wiki-id='gameplay:accessories'><img class='card_thumb' title='" . $data[1] . "' alt='" . $data[1] . "' src='/sifas/wiki/images/accessory/" . $data[0] . ".png'></a>";
+        $renderer->doc .= "<a href='" . hsc(DOKU_BASE . $data[2]) . "' data-wiki-id='gameplay:accessories'><img class='card_thumb' title='" . hsc($data[1]) . "' alt='" . hsc($data[1]) . "' src='/sifas/wiki/images/accessory/" . hsc($data[0]) . ".png'></a>";
         return true;
     }
 }
