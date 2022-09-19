@@ -15,8 +15,7 @@ class action_plugin_sifas_toolbar extends \dokuwiki\Extension\ActionPlugin
     function insert_button(Doku_Event $event, $param) {
         // GENERAL
     
-        for ($i=0; $i<count($event->data); $i++) { 
-            error_log($event->data[$i]['title']);
+        for ($i=0; $i<count($event->data); $i++) {
             if($event->data[$i]['title'] == 'Smileys') {
                 unset($event->data[$i]);        
             }
