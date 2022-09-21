@@ -9,6 +9,7 @@ class syntax_plugin_sifas_skill extends \dokuwiki\Extension\SyntaxPlugin
 {
     public static $SKILL_NAMES = array(
                             "appeal" => "Appeal+",
+                            "cleanse" => "Cleanse Debuffs",
                             "critchance" => "Critical Chance Up",
                             "critpower" => "Crit Power Up",
                             "dr" => "Damage Reduction",
