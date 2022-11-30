@@ -40,7 +40,7 @@ class action_plugin_sifas_templatesong extends \dokuwiki\Extension\ActionPlugin
         }
         
         $title = str_replace("+","plus",str_replace("µ","u",strtolower($song["name"])));
-        $title = preg_replace("/[_\\-\\.]+$/","",preg_replace("/^[_\\-\\.]+/","",preg_replace("/[^a-z0-9\\-_\\.]+/","_",$title)));
+        $title = preg_replace("/[_\\-\\.]+$/","",preg_replace("/^[_\\-\\.]+/","",preg_replace("/[^a-z0-9]+/","_",preg_replace("/\\./","",$title))));
         $title .= "_" . str_replace("+","plus",strtolower(action_plugin_sifas_templatesong::$DIFF_SHORT_IDS[substr($ldid,5,2)]));
         
         if (page_exists("songs:" . $title)) {
