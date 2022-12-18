@@ -59,7 +59,7 @@ class syntax_plugin_sifas_cardlink extends \dokuwiki\Extension\SyntaxPlugin
             return true;
         }
         if($mode == 'metadata') {
-            $renderer->internallink("cards:".$data[1]);
+            $renderer->internallink("cards:".$data['card_id']);
             return true;
         }
         return false;
