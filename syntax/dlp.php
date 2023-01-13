@@ -37,10 +37,14 @@ class syntax_plugin_sifas_dlp extends \dokuwiki\Extension\SyntaxPlugin
         
         $parts = explode("\n===== ", $match);
         $newparts = array(array_shift($parts));
+        if (count($parts) == 0) {
+            $parts = array($match);
+        }
         $first = true;
         $i = 2;
         $allanchors = array();
         
+        error_log(print_r($parts,true));
         foreach ($parts as $part) {
             if ($first) $first = false;
             else {
