@@ -38,13 +38,15 @@ class syntax_plugin_sifas_dlp extends \dokuwiki\Extension\SyntaxPlugin
         $parts = explode("\n===== ", $match);
         $newparts = array(array_shift($parts));
         if (count($parts) == 0) {
+            // No 2nd level headings means no seperate parts, parse the whole thing at once
             $parts = array($match);
+            $newparts = array();
         }
+        
         $first = true;
         $i = 2;
         $allanchors = array();
         
-        error_log(print_r($parts,true));
         foreach ($parts as $part) {
             if ($first) $first = false;
             else {
@@ -157,7 +159,6 @@ class syntax_plugin_sifas_dlp extends \dokuwiki\Extension\SyntaxPlugin
                     $allhtmlicons = array_merge_recursive($allhtmlicons,$htmlicons);
                 }
                 
-                error_log(print_r($allhtmlicons,true));
                 if (array_key_exists("Attribute",$allhtmlicons)) $table .= implode("", array_unique($allhtmlicons["Attribute"]));
                 $table .= '</td><td class="col2 centeralign">';
                 if (array_key_exists("Type",$allhtmlicons)) $table .= implode("", array_unique($allhtmlicons["Type"]));
@@ -175,7 +176,6 @@ class syntax_plugin_sifas_dlp extends \dokuwiki\Extension\SyntaxPlugin
             }
             $newparts[] = implode("\n==== ", $newstages);
         }
-        //error_log($table);
         return array($table . '</tbody></table></div>', p_get_instructions(implode("\n===== ", $newparts)));
     }
 
