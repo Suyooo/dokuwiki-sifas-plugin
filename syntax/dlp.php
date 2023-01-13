@@ -181,17 +181,17 @@ class syntax_plugin_sifas_dlp extends \dokuwiki\Extension\SyntaxPlugin
 
     public function render($mode, Doku_Renderer $renderer, $data)
     {
-        if ($mode === 'xhtml') {
-            // output table html
-            $renderer->doc .= "<div class='dlp_parade'>" . $data[0];
-        }
         if ($data != NULL) {
+            if ($mode === 'xhtml') {
+                // output table html
+                $renderer->doc .= "<div class='dlp_parade'>" . $data[0];
+            }
             // render rest in all modes
             $renderer->doc .= p_render($mode, $data[1], $info);
-        }
-        if ($mode === 'xhtml') {
-            // output table html
-            $renderer->doc .= "</div>";
+            if ($mode === 'xhtml') {
+                // output table html
+                $renderer->doc .= "</div>";
+            }
         }
         return true;
     }
