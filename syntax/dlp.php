@@ -61,7 +61,7 @@ class syntax_plugin_sifas_dlp extends \dokuwiki\Extension\SyntaxPlugin
             foreach ($stages as $stage) {
                 $attr = substr($stage, strpos($stage, "{{attr:") + 7, 1);
                 $name = substr($stage, 0, strpos($stage, " ===="));
-                $anchorbase = preg_replace("/[ ,&•]+/", "_", trim(preg_replace('/^[0-9]+|[:!?.()"+]/', '', strtolower($name))));
+                $anchorbase = preg_replace("/[ ,&•]+/u", "_", trim(preg_replace('/^[0-9]+|[:!?.()"+]/u', '', strtolower($name))));
                 $anchor = $anchorbase;
                 $anchorno = 1;
                 while (array_key_exists($anchor,$allanchors)) {
