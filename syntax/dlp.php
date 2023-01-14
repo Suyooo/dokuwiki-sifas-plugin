@@ -22,7 +22,9 @@ class syntax_plugin_sifas_dlp extends \dokuwiki\Extension\SyntaxPlugin
 
     /** @inheritDoc */
     public function connectTo($mode) {
-        $this->Lexer->addEntryPattern('<DLP_PARADE>(?=.*?</DLP_PARADE>)',$mode,'plugin_sifas_dlp');
+        global $ID;
+        if (str_starts_with($ID,"events:dlp:"))
+            $this->Lexer->addEntryPattern('<DLP_PARADE>(?=.*?</DLP_PARADE>)',$mode,'plugin_sifas_dlp');
     }
     public function postConnect() {
         $this->Lexer->addExitPattern('</DLP_PARADE>','plugin_sifas_dlp');
@@ -59,7 +61,7 @@ class syntax_plugin_sifas_dlp extends \dokuwiki\Extension\SyntaxPlugin
             foreach ($stages as $stage) {
                 $attr = substr($stage, strpos($stage, "{{attr:") + 7, 1);
                 $name = substr($stage, 0, strpos($stage, " ===="));
-                $anchorbase = preg_replace("/[ ,]+/", "_", trim(preg_replace('/^[0-9]+|[:!?.()"+]/', '', strtolower($name))));
+                $anchorbase = preg_replace("/[ ,&•]+/", "_", trim(preg_replace('/^[0-9]+|[:!?.()"+]/', '', strtolower($name))));
                 $anchor = $anchorbase;
                 $anchorno = 1;
                 while (array_key_exists($anchor,$allanchors)) {
@@ -152,6 +154,11 @@ class syntax_plugin_sifas_dlp extends \dokuwiki\Extension\SyntaxPlugin
                     foreach ($matches_list as $matches) {
                         $wikiicons["Skill AC"][] = "{{skill:skillchance}}";
                         $htmlicons["Other"][] = "<span title='".hsc($hint)."'><img class='inline_icon' alt='Crit AC' src='/sifas/wiki/images/skill/skillchance.png'></span>";
+                    }
+                    preg_match_all('/\{\{dlp:other:stamina\}\}/', $line, $matches_list, PREG_UNMATCHED_AS_NULL | PREG_SET_ORDER);
+                    foreach ($matches_list as $matches) {
+                        $wikiicons["Stamina AC"][] = "{{skill:dr}}";
+                        $htmlicons["Other"][] = "<span title='".hsc($hint)."'><img class='inline_icon' alt='Stamina AC' src='/sifas/wiki/images/skill/dr.png'></span>";
                     }
                     
                     if (count($wikiicons) == 0) $newlines[] = $line;
